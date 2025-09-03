@@ -1,0 +1,363 @@
+:root {
+    --cell-color: #4f7cf6;
+    --even-cell-color: #00000080;
+    --odd-cell-color: #ffffff80;
+}
+
+body {
+    margin: 0;
+    min-height: 823px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('./icons/background.jpeg');
+    background-size: cover;
+    padding: 0 100px;
+    position: relative;
+}
+
+.game-container {
+    align-self: flex-start;
+}
+
+.start-game-text {
+    position: absolute;
+    right: 44px;
+    bottom: 236px;
+    font-size: 36px;
+    color: #d4b179;
+    font-weight: 900;
+    font-family: fantasy;
+    transform: rotate(9deg) rotateY(15deg);
+    cursor: pointer;
+    text-shadow:
+        3px 0px 5px #da4b0c,
+        -3px 0px 5px #da4b0c,
+        0px 3px 5px #da4b0c,
+        0px -3px 5px #da4b0c;
+}
+
+.start-game-text:hover {
+    color: #4e341d;
+}
+
+.gamer-header {
+    align-items: center;
+    background: #4a752c80;
+    border-radius: 30px 30px 0 0;
+    display: flex;
+    height: 75px;
+    justify-content: space-between;
+    padding: 0 25px;
+}
+
+.left-side {
+    display: flex;
+    gap: 30px;
+}
+
+.score,
+.high-score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.apple-icon,
+.trophy-icon {
+    background-image: url('./icons/apple.png');
+    background-size: 80px;
+    background-position: center;
+    width: 40px;
+    height: 40px;
+}
+
+.trophy-icon {
+    background-image: url('./icons/trophy.png');
+    background-size: cover;
+}
+
+.score-value,
+.high-score-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    font-family: fantasy;
+    margin: 12px 0 0 0;
+}
+
+.sound-icon {
+    background-image: url('./icons/mute.png');
+    background-size: cover;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+
+.ground-wrapper {
+    display: grid;
+    grid-template-columns: repeat(15, 40px);
+    grid-template-rows: repeat(15, 40px);
+    border: 25px solid #588a34ba;
+    border-radius: 0 0 30px 30px;
+}
+
+.even {
+    background-color: var(--even-cell-color);
+}
+
+.odd {
+    background-color: var(--odd-cell-color);
+}
+
+.even, .odd {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+}
+
+.ground-color-pick .even,
+.ground-color-pick .odd {
+    position: unset;
+}
+
+.ground-color-pick .even {
+    background-color: #00000080;
+}
+
+.ground-color-pick .odd {
+    background-color: #ffffff80;
+}
+
+.cell {
+    background-color: var(--cell-color);
+    z-index: 3;
+}
+
+.eaten-apple {
+    transform: scale(1.5);
+    border-radius: 50%;
+}
+
+.snake {
+    border-radius: 50% 50% 0 0;
+    border: none;
+    transform: rotate(90deg);
+    z-index: 4;
+}
+
+.eyes {
+    display: flex;
+    height: 20px;
+    justify-content: space-between;
+    position: relative;
+    width: 40px;
+    top: 18px;
+}
+
+.eye {
+    background: #fff;
+    border-radius: 50%;
+    border: 3px solid var(--cell-color);
+    height: 15px;
+    width: 20px;
+    position: relative;
+}
+
+.eye::after {
+    content: '';
+    background: #305cc2;
+    display: block;
+    border-radius: 50%;
+    height: 5px;
+    width: 4px;
+    position: absolute;
+    top: -13px;
+    left: 1px;
+}
+
+.eye:first-of-type::after {
+    left: 10px;
+}
+
+.eye::before {
+    content: '';
+    background: #1c469e;
+    display: block;
+    border-radius: 50%;
+    height: 9px;
+    width: 9px;
+    position: absolute;
+    top: 0px;
+    left: 4px;
+}
+
+.apple {
+    background-image: url('./icons/apple.png');
+    background-size: 80px;
+    z-index: 1;
+    background-position: center;
+    position: relative;
+    animation: appleSizing 1.5s linear infinite;
+}
+
+@keyframes appleSizing {
+    0% {
+        transform: scale(0.9);
+    }
+    25% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    75% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0.9);
+    }
+}
+
+.apple::before {
+    content: '';
+    width: 20px;
+    height: 6px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    top: 22px;
+    background: transparent;
+    transform: translate(-50%);
+    box-shadow: 0px 15px 9px 0px black;
+}
+
+.game-over-container {
+    align-items: center;
+    background: #000000bd;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 10;
+}
+
+.game-over-container.hide {
+    display: none;
+}
+
+.game-over-wrapper {
+    background-color: lightblue;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 400px;
+    position: relative;
+    width: 400px;
+}
+
+.game-over-header {
+    align-items: flex-end;
+    display: flex;
+    gap: 75px;
+    height: 40%;
+    justify-content: center;
+}
+
+.game-over-header .score,
+.game-over-header .high-score {
+    flex-direction: column;
+    gap: 0;
+}
+
+.game-over-header .score .apple-icon,
+.game-over-header .high-score .trophy-icon {
+    width: 80px;
+    height: 80px;
+    background-size: cover;
+}
+
+.game-over-header .score .apple-icon {
+    background-size: 150px;
+}
+
+.game-over-header .score .score-value,
+.game-over-header .high-score .high-score-value {
+    font-size: 32px;
+    margin: 0;
+}
+
+.snake-color-pick {
+    background-color: var(--cell-color);
+    background-image: url('./icons/default_snake.png');
+    background-position: -120px;
+    background-repeat: no-repeat;
+    background-size: 600px;
+    border-radius: unset;
+    cursor: pointer;
+    height: 30%;
+    width: 100%;
+}
+
+.ground-color-pick {
+    width: 100%;
+    height: 30%;
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(3, 40px);
+    border-radius: 0 0 20px 20px;
+    cursor: pointer;
+}
+
+.play-again {
+    width: 370px;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 20px;
+    padding: 15px;
+    background: #5076f9;
+    cursor: pointer;
+    justify-content: center;
+    gap: 20px;
+    transition: all 0.5s ease;
+}
+
+.play-again:hover {
+    background-color: #21398c;
+}
+
+.play-again:hover svg {
+    transform: rotate(-360deg);
+    transition: all 0.5s ease;
+}
+
+.play-again span {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 900;
+    font-family: fantasy;
+}
+
+.play-again svg {
+    width: 50px;
+    height: 50px;
+    fill: #fff;
+    transform: rotate(0deg);
+    transition: transform .5s ease;
+}
+
+.color-input {
+    height: 120px;
+    left: 400px;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    width: 400px;
+}
